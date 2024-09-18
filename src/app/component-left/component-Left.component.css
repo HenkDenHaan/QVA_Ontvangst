@@ -40,16 +40,19 @@
 
 .remark {
    empty-cells: hide;
-   border-radius: 5px;
-   padding: 5px;
-   border: 4px dashed red !important;
+   text-align: right;
+   font-size: 1.6rem;
+   font-weight: 900;
+   color: red;
+   /* border: 4px dashed red !important; */
 }
 
 .remark2 {
    empty-cells: hide;
-   border-radius: 5px;
-   padding: 5px;
-   border: 4px dashed rgb(103, 226, 21) !important;
+   text-align: left;
+   font-size: 1.6rem;
+   font-weight: 900;
+   color: red;
 
 }
 

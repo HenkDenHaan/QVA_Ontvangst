@@ -19,6 +19,7 @@ export class ItemService {
    protected UploadAttributesDataEventEmitter: EventEmitter<IMIResponse>;
    protected ItemDataEventEmitter: EventEmitter<IMIResponse>;
    protected CustomerDataEventEmitter: EventEmitter<IMIResponse>;
+   protected CustomerCugexDataEventEmitter: EventEmitter<IMIResponse>;
    protected LocationDataEventEmitter: EventEmitter<IMIResponse>;
 
    protected ProductionOrderLeftDataEventEmitter: EventEmitter<IMIResponse>;
@@ -71,6 +72,7 @@ export class ItemService {
       this.UploadAttributesDataEventEmitter = new EventEmitter<IMIResponse>();
       this.ItemDataEventEmitter = new EventEmitter<IMIResponse>();
       this.CustomerDataEventEmitter = new EventEmitter<IMIResponse>();
+      this.CustomerCugexDataEventEmitter = new EventEmitter<IMIResponse>();
       this.LocationDataEventEmitter = new EventEmitter<IMIResponse>();
 
       this.ProductionOrderLeftDataEventEmitter = new EventEmitter<IMIResponse>();
@@ -233,22 +235,42 @@ export class ItemService {
       return this.miService.execute(miRequestRight).toPromise();
    };
 
-   public getCustomerDataEventEmitter(): EventEmitter<IMIResponse> {
-      return this.CustomerDataEventEmitter;
+   public getCustomerDataEventEmitter() {
+      return this.CustomerCugexDataEventEmitter;
    }
    SetCustomer(customerNumber: String) {
       this.CustomerNumber = customerNumber;
-      this.loadCustomerdata(customerNumber);
+      // this.loadCustomerdata(customerNumber);
+      this.loadCustomerCugexdata(customerNumber)
    }
 
 
 
-   loadCustomerdata(customerNumber) {
+   // loadCustomerdata(customerNumber) {
+   //    const miRequestRight: IMIRequest = {
+   //       program: "CRS610MI",
+   //       transaction: 'GetBasicData',
+   //       record: {
+   //          CUNO: this.CustomerNumber,
+
+   //       },
+   //       includeMetadata: true,
+   //       maxReturnedRecords: 100,
+
+   //    };
+   //    this.miService.execute(miRequestRight).subscribe(x =>
+   //       this.CustomerDataEventEmitter.emit(x)
+   //    )
+   //    return this.miService.execute(miRequestRight).toPromise();
+   // };
+
+   loadCustomerCugexdata(customerNumber) {
       const miRequestRight: IMIRequest = {
-         program: "CRS610MI",
-         transaction: 'GetBasicData',
+         program: "CUSEXTMI",
+         transaction: 'LstFieldValue',
          record: {
-            CUNO: this.CustomerNumber,
+            FILE: "OCUSMA",
+            PK01: this.CustomerNumber,
 
          },
          includeMetadata: true,
@@ -256,12 +278,10 @@ export class ItemService {
 
       };
       this.miService.execute(miRequestRight).subscribe(x =>
-         this.CustomerDataEventEmitter.emit(x)
+         this.CustomerCugexDataEventEmitter.emit(x)
       )
       return this.miService.execute(miRequestRight).toPromise();
    };
-
-
 
 
 
