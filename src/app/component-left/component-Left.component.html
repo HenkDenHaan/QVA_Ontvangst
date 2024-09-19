@@ -1,4 +1,5 @@
 <div class="BlancLine" style="height: 2vh;"></div>
+
 <div class="eight columns max" style="height: 90vh;margin-left: 1vw">
    <div class="form-responsive row" style="margin-left: 0vw;width: 98vw;">
       <label for="BlancLine" style="min-height: 0.5vh;"></label>
@@ -11,24 +12,19 @@
                               text-align: left;
                               margin-left: 55.5vw;
                               margin-bottom: 1vh; border: 1px solid  !important;">
-
             <option style="font-weight: 900;font-size: large;" value="Lst_SDK_013_011">GROOTVERPAKKING</option>
             <option style="font-weight: 900;font-size: large;" value="Lst_SDK_013_012">KLEINVERPAKKING</option>
             <option style="font-weight: 900;font-size: large;" value="Lst_SDK_013_013">NETZAKJES</option>
             <option style="font-weight: 900;font-size: large;" value="Lst_SDK_013_014">INPAK A16</option>
             <option style="font-weight: 900;font-size: large;" value="Lst_SDK_013_015">ETIKETTEN</option>
-
          </select>
       </div>
    </div>
    <div #datagrid id="datagridLeft" soho-datagrid [gridOptions]="dataGridOptions" [data]="dataGridOptions?.dataset"
       (selected)="onSelectedLeft($event) ">
    </div>
-   <!-- <div class="BlancLine" style="height: 3vh;"></div> -->
-
 </div>
 <div class="four columns " style="margin-left: 0.5vw;">
-
    <hr style="border: 1px solid #000000;width:30.5vw;margin-left: 1vw;" />
 
    <div class="three columns ">
@@ -48,9 +44,7 @@
       <div class="DescriptionSmall">Gekoppelde locatie </div>
       <div class="DescriptionSmall">Lotcode </div>
       <hr style="border: 1px solid #000000;width:30.5vw" />
-
       <div class="BlancLine" style="height: 4.7vh;"></div>
-
       <div class="DescriptionSmall">Partijnummer </div>
       <div *ngIf="Rasfout">
          <div class="DescriptionSmall" style="color: red;"> Ras
@@ -67,15 +61,12 @@
       <div *ngIf="GGNOk">
          <div class="DescriptionSmall" style="color: #000000;">GGN </div>
       </div>
-
-
       <div class="DescriptionSmall">Certificaten </div>
       <div class="BlancLine" style="height: 0.3vh"></div>
       <hr style="border: 1px solid #000000;width:30.5vw" />
    </div>
+
    <div class="nine columns " style="padding-right: 1.1vw;">
-
-
       <div *ngIf="this.selectedRow">
          <div class="value">{{!this.selectedProductLeft?" ":this.selectedProductLeft+' - '+
             this.selectedProductionOrderNumberLeft}}</div>
@@ -94,9 +85,8 @@
          <input id="input-Bano" [(ngModel)]="this.ExistingLotcodeLeft" (change)="UpdateBano($event)" maxlength="5"
             size="5" onclick="this.select();"
             style="width: 4vw;margin-left: 18.2vw;text-align: center;height: 2.2vh;font-weight: 900;font-size: 1.6rem;padding-right: 1px;border:1px solid;" />
-         <!-- <hr style="border: 1px solid #000000;width:auto" /> -->
-         <div class="one columns">
 
+         <div class="one columns">
             <div class="BlancLine" style="height: 8.5vh;"></div>
             <div style="min-height: 2.2vh;">
                <div *ngIf="Rasfout">
@@ -125,12 +115,8 @@
                </div>
             </div>
          </div>
-
-
-         <!-- </div> -->
          <div class="six columns">
             <div class="BlancLine" style="height: 3.4vh;"></div>
-
             <div class="Description" style="margin-left: 7.5vw;font-size: 20px;">Order </div>
             <hr style="border: 1px solid #000000;width:auto" />
             <div class="value">{{this.MTNO_BANO}}</div>
@@ -139,24 +125,16 @@
             <input id="input-Size" [(ngModel)]="this.A4ATAV" (change)="UpdateSize($event)" onclick="this.select() ;"
                style="width: 4vw;margin-left: 6vw;text-align: center;height: 2.2vh;font-weight: 900;font-size: 1.6rem;padding-right: 1px;border:1px solid;" />
             <div class="value">{{this.A1ATAV}}</div>
-            <!-- <div class="value">{{this.A2ATAV}}</div> -->
-
-
-            <!-- <div class="value">{{this.A4ATAV}}</div> -->
             <div class="value" style="text-wrap: nowrap;text-transform: uppercase;">
                {{this.A5ATAV}}{{this.A6ATAV===""?"":',
                '+this.A6ATAV}}{{this.A7ATAV===""?"":',
                '+this.A7ATAV}}
             </div>
          </div>
-         <!-- <div class="value">{{this.A6ATAV}}</div>
-      <div class="value">{{this.A7ATAV}}</div> -->
-
-         <!-- <div class="value">{{this.ExistingLotcodeLeft}} </div> -->
          <div class="BlancLine" style="height: 1.3vh;"></div>
-         <!-- <hr style="border: 1px solid #000000;width:auto" /> -->
       </div>
    </div>
+
    <div class="twelve columns" style="margin-top: 2vh;">
       <div class="six columns" style="margin-left: 0vh;">
          <div class="DescriptionSmall" style="margin-left: 0vw;font-size: 20px;">Controle Start </div>
@@ -280,8 +258,6 @@
          </div>
       </div>
       <div class="twelve columns" style="min-height:10vh;margin-left: 0vw;">
-         <!-- <div class="six columns"> -->
-         <!-- <div class="BlancLine" style="height: 1px"></div> -->
          <input id="input-QuantityBoxLabels" [(ngModel)]="QuantityBoxLabels" (keydown.enter)="PrintBoxLabels($event)"
             *ngIf="ShowButtonBoxLabel" style="width: 6vw;margin-left: 16.5vw;text-align: center;height: 5vh;border: #0072ED 4px solid;
          border-radius: 9px;    padding-right: 21px;    font-weight: 900;    font-size: 25px; "
@@ -289,16 +265,11 @@
          <button
             style="    margin-left: -1vw;      width: 8.5vw;      height: 5vh;font-weight: 900;    font-size: 25px;padding-left: 0px;"
             soho-button="primary" *ngIf="ShowButtonBoxLabel" (click)="PrintBoxLabels($event)">Print dooslabel</button>
-         <!-- </div>
-      <div class="six columns"> -->
-         <!-- <div class="BlancLine" style="height: 1px"></div> -->
          <button
             style="margin-left: 21.4vw;width: 8.5vw;      height: 5vh;font-weight: 900;    font-size: 25px;padding-left: 0px;"
             soho-button="primary" *ngIf="ShowButtonSaveControles" (click)="UpdateAttributes($event)">Save
             Controles</button>
-         <!-- </div> -->
       </div>
-      <!-- <div class="twelve columns"> -->
       <input id="input-QuantityToReceiveLeft" [(ngModel)]="MaxQuantityToReceiveLeft"
          (keydown.enter)="ReceiveQuantityLeft($event)" style="width: 6vw;margin-left: 16.5vw;text-align: center;height: 5vh;border: #0072ED 4px solid;
          border-radius: 9px;    padding-right: 21px;    font-weight: 900;    font-size: 25px;"
@@ -308,8 +279,5 @@
       <button
          style="margin-left: 21.4vw;width: 8.5vw;      height: 5vh;font-weight: 900;    font-size: 25px;padding-left: 0px;"
          soho-button="primary" *ngIf="ShowButtonCloseOrder" (click)="CloseOrder($event)">Close order</button>
-      <!-- </div> -->
-
-
    </div>
 </div>
