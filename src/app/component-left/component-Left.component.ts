@@ -3,7 +3,6 @@ import { IUserContext, MIRecord } from '@infor-up/m3-odin';
 import { MIService, UserService, ApplicationService, FormService } from '@infor-up/m3-odin-angular';
 import { SohoDataGridComponent, SohoModalDialogRef, SohoModalDialogService, } from 'ids-enterprise-ng';
 import { ItemService } from '../item.service';
-import { filter } from 'rxjs';
 
 @Component({
    selector: 'app-component-Left',
@@ -16,61 +15,25 @@ export class ComponentLeftComponent {
    public Actie: string;
    public Machine: any;
    AlreadyProducedLeft: any;
-   checkExpiDate: any;
    CUNMLeft: any;
-   EANcodeLeft: string = '';
    ExistingLotcodeLeft: any;
-   ExistingThTLeft: any;
-   ExpiApiDate: any;
-   ExpirationDateLeft: any;
    PalletAantalLeft: any;
-   MachineLeft: any;
    RasBunkerLeft: any;
-   RasBunkerLeft2: any;
    MTNOLeft: string;
    MFNOLeft: string;
-   MTNOStockLocation: string;
    OrderQuantityLeft: any;
    PalletLeft: any;
-   ProdApiDateLeft: String;
-   ProductionDateLeft: String;
    QuantityToReceiveLeft: String;
-   RemainToReceiveLeft: string;
-   RemarkLeft: any;
    selectedProductionOrderDescriptionLeft: any;
    selectedProductionOrderNumberLeft: string = '';
    selectedRow: MIRecord;
-   selectedRowIndex: number;
    StockLeft: any;
-   WarningExpiDate: any;
    selectedProductLeft: any;
-   ConnectedOrderStatus: string = '';
-   RemarkLeft_ST: string = '';
-   FACI: any;
-   PREA: any;
-   RORN: any;
-   THTMin: any;
-   THTMAx: any;
-   NAPQTY: any;
    messageModal3: SohoModalDialogRef<unknown>;
    VHWHST: any;
-   public apiDateLeft: any;
    MaxQuantityToReceiveLeft: any;
-   D1QT: any;
-   selectedFilterChange: any;
    MAQA: number;
-   ToDPS: any;
-   BANOhand: boolean;
-   BANOLeft: any;
-   apiBANOLeft: any;
-   MTNOLeft2: any;
-   StockLeft2: any;
-   RasBunkerLeft1: any;
    BunkerLeft: string;
-   GGNBunker: any;
-   ITDS: any;
-   FUDS: any;
-   CUNM: any;
    Palletname: any;
    Attributenumber: any;
    A1ATAV: any;
@@ -100,7 +63,6 @@ export class ComponentLeftComponent {
    ShowButtonSaveControles: boolean;
    isValid: boolean = true;
 
-   id: string;
    LocBano: any;
    Dooslabel: any;
    ShowButtonBoxLabel: boolean;
@@ -133,7 +95,7 @@ export class ComponentLeftComponent {
 
    @ViewChild('datagridLeft', { static: false }) dataGrid: SohoDataGridComponent;
    @Input() artikel: ItemService[];
-   private datagrid: SohoDataGridComponent;
+   // private datagrid: SohoDataGridComponent;
    public dataGridOptions: SohoDataGridOptions;
    static reload: any
 
@@ -147,12 +109,9 @@ export class ComponentLeftComponent {
                records.push(item);
             });
             this.dataGridOptions.dataset = records;
-
          });
    }
    ngOnInit() {
-
-
    }
 
    buildDataGrid(): void {
@@ -201,9 +160,7 @@ export class ComponentLeftComponent {
       } else {
          return 'normal'
       }
-
    }
-
 
    private customCssClass2(row: number, cell: number, fieldValue: any, columnDef: SohoDataGridColumn, rowData: any): string {
       const ToProduce = Number(rowData.V_1235);
@@ -232,8 +189,6 @@ export class ComponentLeftComponent {
       const Opm = rowData.V_6215
       if (dateTime.getTime() < dateOrder.getTime()) {
          return 'grey';
-         ;
-
       } else {
          if (Opm === "(!)") {
             return 'normal_red'
@@ -282,19 +237,17 @@ export class ComponentLeftComponent {
       if (QuantityBoxLabels > 300) {
          this.showMessageModal2('Max 300 labels kunnen geprint worden', 'Max 300 labels can be printed', 'Można wydrukować maksymalnie 300 etykiet');
          this.isValid = true;
+         this.QuantityBoxLabels = "";
          return;
       }
-
 
       for (let i = 0; QuantityBoxLabels > 99; i++) {
          const mformsResponse1 = this.formService.launch('mforms://_automation?data=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%3csequence%3e%3cstep +command%3d%22RUN%22+value%3d%22PMS250%22+%2f%3e%3cstep +command%3d%22AUTOSET%22%3e%3cfield +name%3d%22WWFACI%22%3e100%3c%2ffield%3e%3cfield +name%3d%22WAPRNO%22%3e' + PRNO + '%3c%2ffield%3e%3cfield +name%3d%22WAOPNO%22%3e%3c%2ffield%3e%3cfield +name%3d%22WAMFNO%22%3e' + MFNO + '%3c%2ffield%3e%3c%2fstep%3e%3cstep +command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep +command%3d%22LSTOPT%22+value%3d%22-1%22+%2f%3e%3cstep+%2f%3e%3cstep +command%3d%22AUTOSET%22%3e%3cfield +name%3d%22WANUC1%22%3e99%3c%2ffield%3e%3cfield +name%3d%22WANUC4%22%3e%3c%2ffield%3e%3c%2fstep%3e%3cstep +command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep +command%3d%22KEY%22+value%3d%22F3%22+%2f%3e%3cstep +%2f%3e%3c%2fsequence%3e');
          QuantityBoxLabels = QuantityBoxLabels - 99
       }
       const mformsResponse1 = this.formService.launch('mforms://_automation?data=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%3csequence%3e%3cstep +command%3d%22RUN%22+value%3d%22PMS250%22+%2f%3e%3cstep +command%3d%22AUTOSET%22%3e%3cfield +name%3d%22WWFACI%22%3e100%3c%2ffield%3e%3cfield +name%3d%22WAPRNO%22%3e' + PRNO + '%3c%2ffield%3e%3cfield +name%3d%22WAOPNO%22%3e%3c%2ffield%3e%3cfield +name%3d%22WAMFNO%22%3e' + MFNO + '%3c%2ffield%3e%3c%2fstep%3e%3cstep +command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep +command%3d%22LSTOPT%22+value%3d%22-1%22+%2f%3e%3cstep+%2f%3e%3cstep +command%3d%22AUTOSET%22%3e%3cfield +name%3d%22WANUC1%22%3e' + QuantityBoxLabels + '%3c%2ffield%3e%3cfield +name%3d%22WANUC4%22%3e%3c%2ffield%3e%3c%2fstep%3e%3cstep +command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep +command%3d%22KEY%22+value%3d%22F3%22+%2f%3e%3cstep +%2f%3e%3c%2fsequence%3e');
+      this.QuantityBoxLabels = "";
    }
-
-
-
 
    async UpdateAttributes(event) {
       const MFNO = this.selectedRow['VHMFNO'];
@@ -345,10 +298,8 @@ export class ComponentLeftComponent {
       this.ShowButtonCloseOrder = false
    }
 
-
    async onSelectedLeft(event: any) {
-
-      this.QuantityBoxLabels = "";
+      this.ShowbuttonToReceive = false;
       this.ShowButtonSaveControles = false
       this.ShowButtonBoxLabel = false
       this.ShowButtonCloseOrder = false
@@ -356,6 +307,7 @@ export class ComponentLeftComponent {
       this.isValid = false
       this.Rasfout = false
       this.GGNfout = false
+      this.QuantityBoxLabels = "";
       this.LocBano = "";
       this.LocRas = "";
       this.LocLVO = "";
@@ -391,15 +343,19 @@ export class ComponentLeftComponent {
       this.MTNOLeft = this.selectedRow['Z5MTNO']
       this.MTNOqty = this.selectedRow['Z5CNQT']
 
+      this.itemService.SetItem(this.PalletLeft)
+      this.itemService.getItemDataEventEmitter().subscribe(x => this.Palletname = x.items[0].FUDS);
+
+      this.itemService.SetCustomer(this.Cuno);
+      this.itemService.getCustomerDataEventEmitter().subscribe(x => this.F1A030 = x.items[0].A030);
+
       this.itemService.SetAttributesOrder(this.selectedProductionOrderNumberLeft, this.selectedProductLeft)
       this.itemService.getAttributesDataEventEmitter().subscribe(x => this.MMITGR = x.items[0].MMITGR);
-      await delay(300)
+      await delay(400)
       if (this.MMITGR === "558") {
          this.IsBIO = true
       }
-      if (this.Dooslabel) {
-         this.ShowButtonBoxLabel = true
-      }
+
       this.itemService.SetAttributesOrder(this.selectedProductionOrderNumberLeft, this.selectedProductLeft)
       this.itemService.getAttributesDataEventEmitter().subscribe(x => this.A1ATAV = x.items[0].A1ATAV);
       this.itemService.getAttributesDataEventEmitter().subscribe(x => this.A2ATAV = x.items[0].A2ATAV);
@@ -425,12 +381,6 @@ export class ComponentLeftComponent {
       this.itemService.getAttributesDataEventEmitter().subscribe(x => this.MTNO_BANO = x.items[0].VMBANO);
       this.itemService.getAttributesDataEventEmitter().subscribe(x => this.MTNO_RAS = x.items[0].V3ATAV);
 
-      this.itemService.SetItem(this.PalletLeft)
-      this.itemService.getItemDataEventEmitter().subscribe(x => this.Palletname = x.items[0].FUDS);
-
-      this.itemService.SetCustomer(this.Cuno);
-      this.itemService.getCustomerDataEventEmitter().subscribe(x => this.F1A030 = x.items[0].A030);
-
       this.itemService.SetLocation(this.BunkerLeft);
       this.itemService.getLocationDataEventEmitter().subscribe(x => this.LocBano = x.items[0].MTBANO);
       this.itemService.getLocationDataEventEmitter().subscribe(x => this.LocRas = x.items[0].AGATVA);
@@ -440,9 +390,18 @@ export class ComponentLeftComponent {
       this.itemService.getLocationDataEventEmitter().subscribe(x => this.LocPP = x.items[0].A4ATVA);
       this.itemService.getLocationDataEventEmitter().subscribe(x => this.LocGrasp = x.items[0].A5ATVA);
       this.itemService.getLocationDataEventEmitter().subscribe(x => this.LocSpring = x.items[0].A6ATVA);
-      await delay(3000)
+
+      for (let i = 0; i < 10; i++) {
+         if (!this.LocBano) {
+            await delay(1000);
+         }
+      }
+
       if (this.LocBano) {
          this.LocGGNcheck = true;
+      }
+      if (this.Dooslabel) {
+         this.ShowButtonBoxLabel = true
       }
       if (this.MTNO_RAS != this.LocRas && this.BunkerLeft != "" && this.BunkerLeft != "HAND" && this.BunkerLeft != "Nog niet gekoppeld") {
          this.Rasfout = true
@@ -451,6 +410,15 @@ export class ComponentLeftComponent {
          this.Rasfout = false
          this.RasOk = true
       }
+      if (this.MTNO_RAS != this.LocRas || this.BunkerLeft == "Nog niet gekoppeld") {
+
+         this.ShowbuttonToReceive = false;
+         this.ShowButtonBoxLabel = false;
+      } else {
+
+         this.ShowbuttonToReceive = true;
+      }
+
       if (this.A1ATAV != this.LocGGN && this.BunkerLeft != "" && this.BunkerLeft != "HAND" && this.BunkerLeft != "Nog niet gekoppeld") {
          this.GGNfout = true
          this.GGNOk = false
@@ -474,17 +442,13 @@ export class ComponentLeftComponent {
       this.itemService.getStockLeftDataEventEmitter().subscribe(x => this.StockLeft = x.items[0].STQT)
       const delay = ms => new Promise(res => setTimeout(res, ms));
       await delay(500)
-      const MTNOLeft = this.selectedRow['Z5MTNO'];
       const AlreadyProduced = Number(this.AlreadyProducedLeft);
-
       const LocRas = this.LocRas;
       const MFNO = this.selectedRow['VHMFNO'];
       const PRNO = this.selectedRow['VHPRNO'];
-      const YEAR = this.selectedRow['V_1600'].substring(8, 10);
       const Bunker = this.BunkerLeft;
       const Bano = this.ExistingLotcodeLeft;
       const RasOrder = this.selectedRow['A8ATAV'];
-      const RasBunker = this.selectedRow['A7ATVA'];
       const A8ATAN = this.A8ATAN;
       const B2ATAV = this.B2ATAV;
       const B3ATAV = this.B3ATAV;
@@ -499,10 +463,6 @@ export class ComponentLeftComponent {
       const B8ATAV = this.B8ATAV;
       const PalletLeft = this.PalletLeft;
       const MTNO_BANO = this.MTNO_BANO
-      const MTNO_RAS = this.MTNO_RAS
-      const StockLeft = this.StockLeft
-      const MTNOqty = this.MTNOqty
-      const MTNO_totalQty = (Number(this.MTNOqty) * Number(this.MaxQuantityToReceiveLeft) * 1.1)
       const VHWHST = this.VHWHST;
 
       let D1QT = Number(this.PalletAantalLeft);
@@ -593,7 +553,7 @@ export class ComponentLeftComponent {
             for (let i = 0; i < 5; i++) {
                const AlreadyProducedAfter = Number(this.OrderQuantityLeft) - Number(this.QuantityToReceiveLeft);
                if (AlreadyProducedAfter > AlreadyProduced) {
-                  this.showMessageModal3('Label voor ' + this.MaxQuantityToReceiveLeft + ' stuks wordt geprint!', 'Label is printing!', 'Etykieta jest drukowana!')
+                  this.showMessageModal2('Label voor ' + this.MaxQuantityToReceiveLeft + ' stuks wordt geprint!', 'Label is printing!', 'Etykieta jest drukowana!')
                   this.messageModal3.afterClose(() => {
                   })
                   this.isValid = true;
@@ -603,178 +563,13 @@ export class ComponentLeftComponent {
                   await delay(3000)
                }
             }
-            this.showMessageModal3('Ontvangst niet uitgevoerd! Probeer opnieuw of vraag hulp.', 'Reception not carried out! Please try again or ask for help.', 'Odbiór nie został przeprowadzony! Spróbuj ponownie lub poproś o pomoc.')
+            this.showMessageModal2('Ontvangst niet uitgevoerd! Probeer opnieuw of vraag hulp.', 'Reception not carried out! Please try again or ask for help.', 'Odbiór nie został przeprowadzony! Spróbuj ponownie lub poproś o pomoc.')
             this.messageModal3.afterClose(() => {
                this.isValid = true;
             })
          }
       }
    }
-
-
-
-   // private showMessageModal(title: string, message: string, message2: string, message3: string, message4: string) {
-   //    this.messageModal = this.sohoModalService.message('<label>' + message + message2 + message3 + message4 + '</label>');
-   //    this.messageModal.options({
-   //       title: title,
-   //       buttons: [
-   //          {
-   //             text: 'OK',
-   //             click: async (e, model) => {
-   //                this.messageModal.close();
-   //                const EXPI = this.ExpiApiDate;
-   //                const FACI = this.selectedRow['VHFACI'];
-   //                const MFNO = this.selectedRow['VOMFNO'];
-   //                const PRNO = this.selectedRow['VOPRNO'];
-   //                const NewBANO = this.selectedRow['V_3010'].substring(0, 7) + this.ExpiApiDate.substring(0, 2);
-   //                const MaxQuantityToReceiveLeft = Number(this.MaxQuantityToReceiveLeft);
-   //                this.itemService.setSelectedOrderLeft(this.selectedProductionOrderNumberLeft);
-   //                this.itemService.setStockLeft(this.MTNOLeft, this.itemService.MTNOStockLocationLeft, '');
-   //                const delay = ms => new Promise(res => setTimeout(res, ms));
-   //                const MTNOLeft = this.selectedRow['VMMTNO'];
-   //                const RemainToReceive = Number(this.RemainToReceiveLeft);
-   //                const AlreadyProduced = Number(this.AlreadyProducedLeft);
-   //                const RORN = this.MFNOLeft
-   //                const NAPQTY = this.NAPQTY;
-   //                const STAQ = this.StockLeft;
-   //                const STAQ2 = this.StockLeft2
-   //                const checkExpiDate = this.checkExpiDate;
-   //                const THTMin = this.THTMin;
-   //                const THTMax = this.THTMAx;
-   //                const WHSL = this.itemService.MTNOStockLocationLeft;
-   //                const WHST = this.ConnectedOrderStatus;
-   //                const BRE2 = this.itemService.MTNOStockLocationLeft.substring(6, 12);
-   //                const D1QT = Number(this.D1QT);
-
-   //                //set ThT en BANO
-
-   //                if (this.ExistingThTLeft != "00-00-0000") {
-   //                   this.ExpirationDateLeft = this.ExistingThTLeft
-   //                   this.apiDateLeft = this.ExpirationDateLeft;
-   //                   this.checkExpiDate = this.apiDateLeft.substring(6, 10) + this.apiDateLeft.substring(3, 5) + this.apiDateLeft.substring(0, 2);
-   //                   this.ExpiApiDate = this.apiDateLeft.substring(0, 2) + this.apiDateLeft.substring(3, 5) + this.apiDateLeft.substring(8, 10);
-   //                   this.WarningExpiDate = this.apiDateLeft.substring(0, 2) + '-' + this.apiDateLeft.substring(3, 5) + '-' + this.apiDateLeft.substring(6, 10);
-   //                } else {
-   //                   this.ExpirationDateLeft = this.WarningExpiDate
-   //                }
-   //                if (checkExpiDate < THTMin || checkExpiDate > THTMax) {
-   //                   this.showMessageModal2('ThT ' + this.WarningExpiDate + ' valt buiten bereik', 'Experation date ' + this.WarningExpiDate + ' is out of range', 'Data ważności ' + this.WarningExpiDate + ' jest poza zakresem');
-   //                } else {
-   //                   const mformsResponse = this.formService.launch('mforms://_automation?data=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%3csequence%3e%3cstep+command%3d%22RUN%22+value%3d%22PMS100%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22WWQTTP%22%3e11%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22WHFACI%22%3e' + FACI + '%3c%2ffield%3e%3cfield+name%3d%22WFWHST%22%3e%3c%2ffield%3e%3cfield+name%3d%22WTWHST%22%3e%3c%2ffield%3e%3cfield+name%3d%22W1OBKV%22%3e' + MFNO + '%3c%2ffield%3e%3cfield+name%3d%22W2OBKV%22%3e' + PRNO + '%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22SELROWS%22%3eR1%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22LSTOPT%22+value%3d%222%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22WHBANO%22%3e' + NewBANO + '%3c%2ffield%3e%3cfield+name%3d%22WWMEXP%22%3e' + EXPI + '%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22F3%22+%2f%3e%3cstep+%2f%3e%3c%2fsequence%3e');
-   //                   await delay(500);
-
-   //                   if (this.MAQA > RemainToReceive && NAPQTY > 0) {
-   //                      this.itemService.loadComponentLeft()
-   //                      this.showMessageModal2('Aantal te groot! Op deze order kunnen nog maximaal ' + RemainToReceive + ' stuks worden ontvangen', 'Quantity to large! Max. ' + RemainToReceive + ' pieces can be received on this order', 'Ilość za duża! w ramach tego zamówienia może być maksymalnie ' + RemainToReceive + ' sztuk')
-   //                   } else {
-   //                      if (this.MAQA > D1QT) {
-   //                         this.itemService.loadComponentLeft()
-   //                         this.showMessageModal2('Aantal te groot! Maximaal ' + MaxQuantityToReceiveLeft + ' per pallet', 'Quantity too large! Maximum ' + MaxQuantityToReceiveLeft + ' per pallet', 'Ilość za duża! Maksymalnie ' + MaxQuantityToReceiveLeft + ' na paletę');
-   //                      } else {
-   //                         if (RORN != '' && (STAQ <= 0 || !STAQ)) {
-   //                            if (!WHST || WHST === "90") {
-   //                               this.showMessageModal2('Gekoppelde order fout!', 'Error connected order!', 'Blad przyporzadkowania zamówienia!');
-   //                               this.isValid = true;
-   //                               return;
-   //                            } else {
-   //                               //set SPMT to 2
-
-   //                               if (this.MAQA <= MaxQuantityToReceiveLeft) {
-   //                                  const mformsResponse1 = this.formService.launch('mforms://_automation?data=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%3csequence%3e%3cstep+command%3d%22RUN%22+value%3d%22PMS100%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22WWQTTP%22%3e11%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22WWFACI%22%3e200%3c%2ffield%3e%3cfield+name%3d%22WFWHST%22%3e%3c%2ffield%3e%3cfield+name%3d%22WTWHST%22%3e%3c%2ffield%3e%3cfield+name%3d%22W1OBKV%22%3e' + MFNO + '%3c%2ffield%3e%3cfield+name%3d%22W2OBKV%22%3e' + PRNO + '%3c%2ffield%3e%3cfield+name%3d%22WWPSEQ%22%3eE1%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22LSTOPT%22+value%3d%222%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22SELROWS%22%3eR1%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22LSTOPT%22+value%3d%222%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22WMWHSL%22%3e%3c%2ffield%3e%3cfield+name%3d%22WMSPMT%22%3e2%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22F3%22+%2f%3e%3cstep+command%3d%22LSTOPT%22+value%3d%2251%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22WLBRE2%22%3e' + BRE2 + '%3c%2ffield%3e%3cfield+name%3d%22WHRVQA%22%3e' + this.MAQA + '%3c%2ffield%3e%3cfield+name%3d%22WHMAQA%22%3e' + this.MAQA + '%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep +command%3d%22KEY%22+value%3d%22F3%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22F3%22+%2f%3e%3cstep+%2f%3e%3c%2fsequence%3e');
-   //                               } else {
-   //                                  //extra enter tbv overproductie
-   //                                  const mformsResponse2 = this.formService.launch('mforms://_automation?data=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%3csequence%3e%3cstep+command%3d%22RUN%22+value%3d%22PMS100%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22WWQTTP%22%3e11%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22WWFACI%22%3e200%3c%2ffield%3e%3cfield+name%3d%22WFWHST%22%3e%3c%2ffield%3e%3cfield+name%3d%22WTWHST%22%3e%3c%2ffield%3e%3cfield+name%3d%22W1OBKV%22%3e' + MFNO + '%3c%2ffield%3e%3cfield+name%3d%22W2OBKV%22%3e' + PRNO + '%3c%2ffield%3e%3cfield+name%3d%22WWPSEQ%22%3eE1%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22LSTOPT%22+value%3d%222%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22SELROWS%22%3eR1%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22LSTOPT%22+value%3d%222%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22WMWHSL%22%3e%3c%2ffield%3e%3cfield+name%3d%22WMSPMT%22%3e2%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22F3%22+%2f%3e%3cstep+command%3d%22LSTOPT%22+value%3d%2251%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22WLBRE2%22%3e' + BRE2 + '%3c%2ffield%3e%3cfield+name%3d%22WHRVQA%22%3e' + this.MAQA + '%3c%2ffield%3e%3cfield+name%3d%22WHMAQA%22%3e' + this.MAQA + '%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep +command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep +command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22F3%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22F3%22+%2f%3e%3cstep+%2f%3e%3c%2fsequence%3e');
-   //                               }
-   //                            }
-   //                         } else {
-
-   //                            if (this.MachineLeft = "KCD" && (STAQ <= 0 || STAQ2 <= 0)) {
-   //                               this.showMessageModal2('Geen voorraad!', 'Not enough stock!', 'Wza mało zapasów!');
-   //                               this.isValid = true;
-   //                               return;
-   //                            } else {
-   //                               if (this.MachineLeft = "KCD" && (STAQ <= this.MAQA || STAQ2 <= this.MAQA)) {
-   //                                  if (Number(STAQ2) <= Number(STAQ)) {
-   //                                     const MaxMAQA = STAQ2
-   //                                     this.showMessageModal2('Er kunnen maximaal ' + MaxMAQA + 'st. worden ontvangen', 'Quantity to large! Max. ' + MaxMAQA + ' pieces can be received with current stock', 'Ilość za duża! Maks. W aktualnych stanach magazynowych można otrzymać ' + MaxMAQA + ' sztuk');
-   //                                     this.isValid = true;
-   //                                     return;
-   //                                  } else {
-   //                                     const MaxMAQA = STAQ
-   //                                     this.showMessageModal2('Er kunnen maximaal ' + MaxMAQA + 'st. worden ontvangen', 'Quantity to large! Max. ' + MaxMAQA + ' pieces can be received with current stock', 'Ilość za duża! Maks. W aktualnych stanach magazynowych można otrzymać ' + MaxMAQA + ' sztuk');
-   //                                     this.isValid = true;
-   //                                     return;
-   //                                  }
-   //                               }
-   //                            }
-   //                            if (STAQ <= 0 || !STAQ) {
-   //                               this.showMessageModal2('Trechter leeg!', 'Funnel empty!', 'Wsyp/podajnik jest pusty!');
-   //                               this.isValid = true;
-   //                               return;
-   //                            } else {
-   //                               if (RORN != '') {
-   //                                  this.ToDPS = " (x)";
-   //                               }
-   //                               else {
-   //                                  this.ToDPS = "";
-   //                               }
-   //                               //set SPMT to 3 and WHSL to StockLocation and delete WHRORN
-   //                               if (this.MAQA <= MaxQuantityToReceiveLeft) {
-   //                                  const mformsResponse3 = this.formService.launch('mforms://_automation?data=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%3csequence%3e%3cstep+command%3d%22RUN%22+value%3d%22PMS100%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22WWQTTP%22%3e11%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22WWFACI%22%3e200%3c%2ffield%3e%3cfield+name%3d%22WFWHST%22%3e%3c%2ffield%3e%3cfield+name%3d%22WTWHST%22%3e%3c%2ffield%3e%3cfield+name%3d%22W1OBKV%22%3e' + MFNO + '%3c%2ffield%3e%3cfield+name%3d%22W2OBKV%22%3e' + PRNO + '%3c%2ffield%3e%3cfield+name%3d%22WWPSEQ%22%3eE1%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22LSTOPT%22+value%3d%222%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22SELROWS%22%3eR1%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22LSTOPT%22+value%3d%222%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22WMWHSL%22%3e' + WHSL + '%3c%2ffield%3e%3cfield+name%3d%22WMSPMT%22%3e3%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22F3%22+%2f%3e%3cstep+command%3d%22LSTOPT%22+value%3d%2251%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22WLBRE2%22%3e' + BRE2 + this.ToDPS + this.ToDPS + '%3c%2ffield%3e%3cfield+name%3d%22WHRVQA%22%3e' + this.MAQA + '%3c%2ffield%3e%3cfield+name%3d%22WHMAQA%22%3e' + this.MAQA + '%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep +command%3d%22KEY%22+value%3d%22F3%22+%2f%3e%3cstep +command%3d%22KEY%22+value%3d%22F3%22+%2f%3e%3cstep+%2f%3e%3c%2fsequence%3e');
-   //                               } else {
-   //                                  //extra enter tbv overproductie
-   //                                  const mformsResponse4 = this.formService.launch('mforms://_automation?data=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%3csequence%3e%3cstep+command%3d%22RUN%22+value%3d%22PMS100%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22WWQTTP%22%3e11%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22WWFACI%22%3e200%3c%2ffield%3e%3cfield+name%3d%22WFWHST%22%3e%3c%2ffield%3e%3cfield+name%3d%22WTWHST%22%3e%3c%2ffield%3e%3cfield+name%3d%22W1OBKV%22%3e' + MFNO + '%3c%2ffield%3e%3cfield+name%3d%22W2OBKV%22%3e' + PRNO + '%3c%2ffield%3e%3cfield+name%3d%22WWPSEQ%22%3eE1%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22LSTOPT%22+value%3d%222%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22SELROWS%22%3eR1%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22LSTOPT%22+value%3d%222%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22WMWHSL%22%3e' + WHSL + '%3c%2ffield%3e%3cfield+name%3d%22WMSPMT%22%3e3%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22F3%22+%2f%3e%3cstep+command%3d%22LSTOPT%22+value%3d%2251%22+%2f%3e%3cstep+command%3d%22AUTOSET%22%3e%3cfield+name%3d%22WLBRE2%22%3e' + BRE2 + this.ToDPS + '%3c%2ffield%3e%3cfield+name%3d%22WHRVQA%22%3e' + this.MAQA + '%3c%2ffield%3e%3cfield+name%3d%22WHMAQA%22%3e' + this.MAQA + '%3c%2ffield%3e%3c%2fstep%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22ENTER%22+%2f%3e%3cstep+command%3d%22KEY%22+value%3d%22F3%22+command%3d%22KEY%22+value%3d%22F3%22+%2f%3e%3cstep+%2f%3e%3c%2fsequence%3e');
-   //                               }
-   //                            }
-   //                         }
-   //                         await delay(3000);
-
-   //                         this.itemService.loadComponentLeft()
-   //                         this.itemService.setSelectedOrderLeft(this.selectedProductionOrderNumberLeft);
-   //                         await delay(3000)
-   //                         this.itemService.setStockLeft(MTNOLeft, WHSL, '');
-
-
-   //                         const AlreadyProducedAfter = Number(this.AlreadyProducedLeft);
-   //                         for (let i = 0; i < 3; i++) {
-   //                            if (AlreadyProducedAfter > AlreadyProduced) {
-   //                               this.showMessageModal3('Label voor ' + this.MAQA + ' stuks wordt geprint!', 'Label is printing!', 'Etykieta jest drukowana!')
-   //                               this.messageModal3.afterClose(() => {
-   //                               })
-   //                               this.isValid = true;
-
-   //                               return;
-   //                            } else {
-   //                               await delay(3000)
-   //                            }
-   //                         }
-   //                         this.showMessageModal3('Ontvangst niet uitgevoerd! Probeer opnieuw of vraag hulp.', 'Reception not carried out! Please try again or ask for help.', 'Odbiór nie został przeprowadzony! Spróbuj ponownie lub poproś o pomoc.')
-   //                         this.messageModal3.afterClose(() => {
-   //                            this.isValid = true;
-   //                         })
-   //                      }
-   //                   }
-   //                }
-   //             },
-   //             isDefault: false
-   //          }
-   //          ,
-   //          {
-   //             text: 'Annuleren',
-   //             click: () => {
-   //                this.messageModal.close();
-
-   //                this.isValid = true;
-   //                return;
-   //             },
-   //             isDefault: true
-   //          }
-   //       ],
-   //       content: '<div><h4>' + message + '<br>' + message2 + '</h4><br><br><h1>' + message3 + '<br>' + message4 + '</h1></div>'
-   //    });
-   //    this.messageModal.open();
-   // }
-
 
    private showMessageModal2(title: string, message: string, message2: string) {
       this.messageModal2 = this.sohoModalService.message('<label>' + message + message2 + '</label>');
@@ -796,28 +591,4 @@ export class ComponentLeftComponent {
       this.messageModal2.open();
    }
 
-   private showMessageModal3(title: string, message: string, message2: string) {
-      this.messageModal3 = this.sohoModalService.message('<label>' + message + message2 + '</label>');
-      this.messageModal3.options({
-         title: '<header>' + title + '</header>',
-         buttons: [
-            {
-               text: 'OK',
-               click: (e, model) => { this.messageModal3.close(); },
-               isDefault: true
-            }
-         ],
-         content: '<div><h4>' + message + '<br>' + message2 + '</h4></div>'
-      });
-      this.messageModal3.open();
-   }
-
-
-}
-function Highlight(id) {
-   var rows = $('#tbl > tbody > tr').each(function (i, elem) {
-      elem.style.background = 'green';
-   })
-   var tr = document.getElementById(id);
-   tr.style.background = 'red';
 }
