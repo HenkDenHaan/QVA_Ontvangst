@@ -6,10 +6,10 @@ import { ItemService } from '../item.service';
 
 @Component({
    selector: 'app-component-Left',
-   templateUrl: './component-Left.component.html',
-   styleUrls: ['./component-Left.component.css']
+   templateUrl: './Orders.component.html',
+   styleUrls: ['./Orders.component.css']
 })
-export class ComponentLeftComponent {
+export class OrdersComponent {
    private messageModal: SohoModalDialogRef<any>;
    private messageModal2: SohoModalDialogRef<any>;
    public Actie: string;
@@ -95,7 +95,6 @@ export class ComponentLeftComponent {
 
    @ViewChild('datagridLeft', { static: false }) dataGrid: SohoDataGridComponent;
    @Input() artikel: ItemService[];
-   // private datagrid: SohoDataGridComponent;
    public dataGridOptions: SohoDataGridOptions;
    static reload: any
 
@@ -346,9 +345,6 @@ export class ComponentLeftComponent {
       this.itemService.SetItem(this.PalletLeft)
       this.itemService.getItemDataEventEmitter().subscribe(x => this.Palletname = x.items[0].FUDS);
 
-      this.itemService.SetCustomer(this.Cuno);
-      this.itemService.getCustomerDataEventEmitter().subscribe(x => this.F1A030 = x.items[0].A030);
-
       this.itemService.SetAttributesOrder(this.selectedProductionOrderNumberLeft, this.selectedProductLeft)
       this.itemService.getAttributesDataEventEmitter().subscribe(x => this.MMITGR = x.items[0].MMITGR);
       await delay(400)
@@ -391,6 +387,9 @@ export class ComponentLeftComponent {
       this.itemService.getLocationDataEventEmitter().subscribe(x => this.LocGrasp = x.items[0].A5ATVA);
       this.itemService.getLocationDataEventEmitter().subscribe(x => this.LocSpring = x.items[0].A6ATVA);
 
+      this.itemService.SetCustomer(this.Cuno);
+      this.itemService.getCustomerDataEventEmitter().subscribe(x => this.F1A030 = x.items[0].A030);
+
       for (let i = 0; i < 10; i++) {
          if (!this.LocBano) {
             await delay(1000);
@@ -426,6 +425,7 @@ export class ComponentLeftComponent {
          this.GGNfout = false
          this.GGNOk = true
       }
+
    }
 
    async ReceiveQuantityLeft(event: any) {

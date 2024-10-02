@@ -28,40 +28,71 @@
    <hr style="border: 1px solid #000000;width:30.5vw;margin-left: 1vw;" />
 
    <div class="three columns ">
-      <div class="DescriptionSmall">Productieorder </div>
-      <div class="DescriptionSmall">Omschrijving </div>
-      <div class="DescriptionSmall">Klant </div>
-      <div class="remark2">{{this.F1A030==""||!this.F1A030?"":"Opmerking" }} </div>
+      <div class="hover-text" style="text-wrap: nowrap; ">Productieorder
+         <span class="tooltip-text" id="top">Productieorder<br>Productieorder</span>
+      </div>
+      <div class="hover-text" style="text-wrap: nowrap; ">Omschrijving
+         <span class="tooltip-text" id="top">Description<br>Opis</span>
+      </div>
+      <div class="hover-text" style="text-wrap: nowrap; ">Klant
+         <span class="tooltip-text" id="top">Customer<br>Klient</span>
+      </div>
       <div class="BlancLine" style="height: 1.3vh"></div>
-      <div class="DescriptionSmall">Type pallet </div>
-      <div class="DescriptionSmall">Aantal per pallet </div>
+      <div class="hover-text" style="text-wrap: nowrap; ">Type pallet
+         <span class="tooltip-text" id="top">Pallettype<br>Typ palety</span>
+      </div>
+      <div class="hover-text" style="text-wrap: nowrap; ">Aantal per pallet
+         <span class="tooltip-text" id="top">Quantity per pallet<br>Ilość na paletę</span>
+      </div>
       <div class="BlancLine" style="height: 1.3vh;"></div>
-      <div class="DescriptionSmall">Orderaantal </div>
-      <div class="DescriptionSmall">Reeds geproduceerd </div>
-      <div class="DescriptionSmall">Nog produceren </div>
+      <div class="hover-text" style="text-wrap: nowrap; ">Orderaantal
+         <span class="tooltip-text" id="top">Order quantity<br>Ilość zamówienia</span>
+      </div>
+      <div class="hover-text" style="text-wrap: nowrap; ">Reeds geproduceerd
+         <span class="tooltip-text" id="top">Already produced<br>Już wyprodukowano</span>
+      </div>
+      <div class="hover-text" style="text-wrap: nowrap; ">Nog te produceren
+         <span class="tooltip-text" id="top">Still to be produced<br>Nadal do wyprodukowania</span>
+      </div>
       <div class="BlancLine" style="height: 0.3vh;"></div>
       <hr style="border: 1px solid #000000;width:30.5vw" />
-      <div class="DescriptionSmall">Gekoppelde locatie </div>
-      <div class="DescriptionSmall">Lotcode </div>
+      <div class="hover-text" style="text-wrap: nowrap; ">Gekoppelde locatie
+         <span class="tooltip-text" id="top">Connected location<br>połączona lokalizacja</span>
+      </div>
+      <div class="hover-text" style="text-wrap: nowrap; ">Lotcode
+         <span class="tooltip-text" id="top">Lotcode<br>Kod partii</span>
+      </div>
       <hr style="border: 1px solid #000000;width:30.5vw" />
       <div class="BlancLine" style="height: 4.7vh;"></div>
-      <div class="DescriptionSmall">Partijnummer </div>
+      <div class="hover-text" style="text-wrap: nowrap; ">Partijnummer
+         <span class="tooltip-text" id="top">Batch number<br>Numer partii</span>
+      </div>
+
       <div *ngIf="Rasfout">
-         <div class="DescriptionSmall" style="color: red;"> Ras
+         <div class="hover-text" style="text-wrap: nowrap; color: red;">Ras
+            <span class="tooltip-text" id="top">Potato variety<br>Odmiana ziemniaka</span>
          </div>
       </div>
       <div *ngIf="RasOk">
-         <div class="DescriptionSmall" style="color: #000000;">Ras </div>
+         <div class="hover-text" style="text-wrap: nowrap; color: #000000;">Ras
+            <span class="tooltip-text" id="top">Potato variety<br>Odmiana ziemniaka</span>
+         </div>
       </div>
-      <div class="DescriptionSmall">LvO </div>
-      <div class="DescriptionSmall">Maat</div>
+      <div class="hover-text" style="text-wrap: nowrap; ">LvO
+         <span class="tooltip-text" id="top">Country of Origin<br>Kraj pochodzenia</span>
+      </div>
+      <div class="hover-text" style="text-wrap: nowrap; ">Maat
+         <span class="tooltip-text" id="top">Size<br>Rozmiar</span>
+      </div>
       <div *ngIf="GGNfout">
          <div class="DescriptionSmall" style="color: red;"> GGN </div>
       </div>
       <div *ngIf="GGNOk">
          <div class="DescriptionSmall" style="color: #000000;">GGN </div>
       </div>
-      <div class="DescriptionSmall">Certificaten </div>
+      <div class="hover-text" style="text-wrap: nowrap; ">Certificaten
+         <span class="tooltip-text" id="top">Certificates<br>Certyfikaty</span>
+      </div>
       <div class="BlancLine" style="height: 0.3vh"></div>
       <hr style="border: 1px solid #000000;width:30.5vw" />
    </div>
@@ -101,7 +132,9 @@
          </div>
          <div class="five columns">
             <div class="BlancLine" style="height: 3.3vh;"></div>
-            <div class="DescriptionSmall" style="margin-left: 5vw;font-size: 20px;">Bunker </div>
+            <div class="hover-text" style="text-wrap: nowrap;margin-left: 5vw;font-size: 20px; ">Bunker
+               <span class="tooltip-text" id="top">Funnel<br>Wsyp/podajnik</span>
+            </div>
             <hr style="border: 1px solid #000000;width:auto" />
             <div class="value">{{this.LocBano}}</div>
             <div class="value">{{this.LocRas}}</div>
@@ -117,7 +150,9 @@
          </div>
          <div class="six columns">
             <div class="BlancLine" style="height: 3.4vh;"></div>
-            <div class="Description" style="margin-left: 7.5vw;font-size: 20px;">Order </div>
+            <div class="hover-text" style="text-wrap: nowrap;margin-left: 7.5vw;font-size: 20px; ">Order
+               <span class="tooltip-text" id="left">Order<br>WZamówienie</span>
+            </div>
             <hr style="border: 1px solid #000000;width:auto" />
             <div class="value">{{this.MTNO_BANO}}</div>
             <div class="value">{{MTNO_RAS}}</div>
@@ -137,18 +172,37 @@
 
    <div class="twelve columns" style="margin-top: 2vh;">
       <div class="six columns" style="margin-left: 0vh;">
-         <div class="DescriptionSmall" style="margin-left: 0vw;font-size: 20px;">Controle Start </div>
+         <div class="hover-text" style="text-wrap: nowrap; margin-left: 0vw;font-size: 20px;">Controle Start
+            <span class="tooltip-text" id="top">Controle start of production<br>Kontroluj rozpoczęcie serii
+               produkcyjne</span>
+         </div>
          <hr style="border: 1px solid #000000;width:14.5vw" />
          <div class="five columns" style="margin-left: 0vh;">
-            <div class="DescriptionSmall">Weging</div>
-            <div class="DescriptionSmall">Codering correct? (Y/N) </div>
-            <div class="DescriptionSmall" style="text-wrap: nowrap; ">Codering goed leesbaar? (Y/N)</div>
-            <div class="DescriptionSmall">Seal in orde? (Y/N) </div>
-            <div *ngIf="IsBIO">
-               <div class="DescriptionSmall" style="text-wrap: nowrap; ">Bio, machine vrij van gangbaar?</div>
+            <div class="hover-text" style="text-wrap: nowrap; ">Weging
+               <span class="tooltip-text" id="top">Weighting<br>Ważenie</span>
             </div>
-            <div class="DescriptionSmall">Machinenummer </div>
-            <div class="DescriptionSmall">Naam controleur </div>
+            <div class="hover-text" style="text-wrap: nowrap; ">Codering correct? (Y/N)
+               <span class="tooltip-text" id="top">Coding correct? (Y/N)<br>Czy kodowanie jest poprawne? (Y/N)</span>
+            </div>
+            <div class="hover-text" style="text-wrap: nowrap; ">Codering goed leesbaar? (Y/N)
+               <span class="tooltip-text" id="top">Coding readable? (Y/N)<br>Kodowanie czytelne? (Y/N)</span>
+            </div>
+            <div class="hover-text" style="text-wrap: nowrap; ">Seal in orde? (Y/N)
+               <span class="tooltip-text" id="top">Seal in order? (Y/N)<br>Pieczęć w porządku? (Y/N)</span>
+            </div>
+            <div *ngIf="IsBIO">
+               <div class="hover-text" style="text-wrap: nowrap; ">Bio, machine vrij van gangbaar?
+                  <span class="tooltip-text" id="top">Organic, Machine free of conventional product?
+                     (Y/N)<br>Organiczny, Maszyna wolna od głównego nurtu? (Y/N)</span>
+               </div>
+            </div>
+            <div class="hover-text" style="text-wrap: nowrap; ">Machinenummer
+               <span class="tooltip-text" id="top">Machine number<br>Numer maszyny</span>
+            </div>
+            <div class="hover-text" style="text-wrap: nowrap; ">Naam controleur
+               <span class="tooltip-text" id="top">Name<br>Nazwa</span>
+            </div>
+
          </div>
          <div class="two columns" style="margin-left: 0vh;">
             <div class="DescriptionSmall" style="width: 6vw;text-align: right;">
@@ -204,15 +258,27 @@
          </div>
       </div>
       <div class="six columns" style="margin-left: 1vw;min-height: 19vh;">
-         <div class="DescriptionSmall" style="margin-left: 0vw;font-size: 20px;">Controle Eind </div>
+         <div class="hover-text" style="text-wrap: nowrap; margin-left: 0vw;font-size: 20px;">Controle Eind
+            <span class="tooltip-text" id="top">Controle end of production<br>Sprawdź koniec serii produkcyjnej</span>
+         </div>
          <hr style="border: 1px solid #000000;width:14.5vw" />
          <div class="five columns" style="margin-left: 0vh;">
-            <div class="DescriptionSmall">Weging</div>
-            <div class="DescriptionSmall">Codering correct? (Y/N) </div>
-            <div class="DescriptionSmall" style="text-wrap: nowrap; ">Codering goed leesbaar? (Y/N)</div>
-            <div class="DescriptionSmall">Seal in orde? (Y/N) </div>
-            <div class="DescriptionSmall" style="text-wrap: nowrap; ">Vrij van optische gebreken? (Y/N) </div>
-
+            <div class="hover-text" style="text-wrap: nowrap; ">Weging
+               <span class="tooltip-text" id="top">Weighting<br>Ważenie</span>
+            </div>
+            <div class="hover-text" style="text-wrap: nowrap; ">Codering correct? (Y/N)
+               <span class="tooltip-text" id="top">Coding correct? (Y/N)<br>Czy kodowanie jest poprawne? (Y/N)</span>
+            </div>
+            <div class="hover-text" style="text-wrap: nowrap; ">Codering goed leesbaar? (Y/N)
+               <span class="tooltip-text" id="top">Coding readable? (Y/N)<br>Kodowanie czytelne? (Y/N)</span>
+            </div>
+            <div class="hover-text" style="text-wrap: nowrap; ">Seal in orde? (Y/N)
+               <span class="tooltip-text" id="top">Seal in order? (Y/N)<br>Pieczęć w porządku? (Y/N)</span>
+            </div>
+            <div class="hover-text" style="text-wrap: nowrap; ">Vrij van optische gebreken? (Y/N)
+               <span class="tooltip-text" id="top">Free from optical defects? (Y/N)<br>Wolne od wad optycznych?
+                  (Y/N)</span>
+            </div>
          </div>
          <div class="two columns" style="margin-left: 0vh;">
             <div class="DescriptionSmall" style="width: 6vw;text-align: right;">
